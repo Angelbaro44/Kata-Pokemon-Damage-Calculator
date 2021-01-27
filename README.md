@@ -31,3 +31,47 @@
     the opponent's type
     your attack power
     the opponent's defense
+
+
+
+Test Cases:
+-
+    const {assert} = require("chai");
+
+    describe("Fixed tests", () => {
+      it("Tests", () => {
+        assert.equal(calculateDamage("fire", "water", 100, 100), 25);
+        assert.equal(calculateDamage("grass", "water", 100, 100), 100);
+        assert.equal(calculateDamage("electric", "fire", 100, 100), 50);
+        assert.equal(calculateDamage("grass", "electric", 57, 19), 150);
+        assert.equal(calculateDamage("grass", "water", 40, 40), 100);
+        assert.equal(calculateDamage("grass", "fire", 35, 5), 175);
+        assert.equal(calculateDamage("fire", "electric", 10, 2), 250);
+      });
+    });
+
+    function sol(yourType, opponentType, attack, defense){
+      var types = "fire water grass electric".split(" ");
+      var matchups =
+      [[.5,.5,2,1],  //fire vs
+       [2,.5,.5,.5], //water vs
+       [.5,2,.5,1],  //grass vs
+       [1,2,1,.5]];  //electric vs
+      var effectiveness = matchups[types.indexOf(yourType)][types.indexOf(opponentType)];
+      return 50 * attack / defense * effectiveness;
+    }
+
+    const randint = require("lodash/random");
+    const base = "fire water grass electric".split(" ");
+
+    describe("Random tests", () => {
+      it("Tests", () => {
+        for (let i = 0; i < 200; i++) {
+          let a = base[randint(0, 3)],
+              b = base[randint(0, 3)],
+              n = randint(10, 100),
+              m = Test.randomize([...Array(100)].map((x, j) => j + 1).filter(x => n % x === 0)).pop();
+          assert.equal(calculateDamage(a, b, n, m), sol(a, b, n, m));
+        }
+      });
+    });
