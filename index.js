@@ -5,7 +5,7 @@
 // Switch Case Method
 function calculateDamage(yourType, opponentType, attack, defense){
       let damage;
-      console.log(yourType+opponentType)
+      console.log('{'+yourType+' vs '+opponentType)
     switch(yourType+' vs '+opponentType) {
         
       case 'fire vs grass':
@@ -33,5 +33,21 @@ function calculateDamage(yourType, opponentType, attack, defense){
         damage = (50 * (attack / defense) * 1)
         break;
     }  
+     console.log(damage+'}');
       return damage
     }
+
+
+    //Test Cases
+    calculateDamage("fire", "water", 100, 100)//Expected Result 25
+    calculateDamage("grass", "water", 100, 100)//Expected Result 100
+    calculateDamage("electric", "fire", 100, 100)//Expected Result 50
+    calculateDamage("grass", "electric", 57, 19)//Expected Result 150
+    calculateDamage("grass", "water", 40, 40)//Expected Result 100
+    calculateDamage("grass", "fire", 35, 5)//Expected Result 175
+    calculateDamage("fire", "electric", 10, 2)//Expected Result 250
+
+
+
+
+
